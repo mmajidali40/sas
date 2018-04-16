@@ -1,0 +1,40 @@
+<!DOCTYPE html>
+<html lang="en" >
+
+<head>
+  <meta charset="UTF-8">
+  <title>Login</title>
+  <link rel="stylesheet" href="/stylesheets/style.css">
+</head>
+
+<body>
+
+  <% if(message != null){ %>
+    <div class="container">
+        <div id='div-alert' class="alert alert-danger alert-dismissible">
+          <a href="#" class="close" data-dismiss="alert" aria-label="close" id='btn-alert'>&times;</a>
+          <strong><%=message%></strong>
+        </div>
+      </div>
+  <% } %>
+
+
+  <div class="login-page">
+  <div class="form">
+    <form class="login-form" action="/login" method="POST">
+      <input type="text" placeholder="username" name="userName" />
+      <input type="password" placeholder="password" name="password"/>
+      <button id="btn-login">login</button>
+    </form>
+  </div>
+    
+</div>
+
+<script language="javascript" src="js/bootstrap.min.js"></script>
+<link rel="stylesheet" href="css/bootstrap.min.css"/>
+<script  src="/javascripts/jquery.js"></script>
+<script  src="/javascripts/common.js"></script>
+<script  src="/javascripts/login.js"></script>
+</body>
+
+</html>

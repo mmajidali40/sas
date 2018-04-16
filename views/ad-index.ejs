@@ -1,0 +1,37 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <title>Home Page</title>
+    <link rel='stylesheet' href='/stylesheets/ad-index.css' />
+  </head>
+  <body>
+    <div>
+        
+        <% if(message != null){ %>
+          <div class="container">
+              <div id='div-alert' class="alert alert-success alert-dismissible">
+                <a href="#" class="close" data-dismiss="alert" aria-label="close" id='btn-alert'>&times;</a>
+                <strong><%=message%></strong>
+              </div>
+            </div>
+        <% } %>
+
+        <h1 class='main-heading'>Welcome to Seasonal Attendence System</h1>
+        <div class="div-controls">
+            <a href="/add-staff" class="btn btn-success btn-lg btn-controls" role="button">Add Staff</a>
+            <a href="/mark-attendance" class="btn btn-primary btn-lg btn-controls" role="button">Mark Attendence</a>
+            <a href="#" class="btn btn-warning btn-lg btn-controls" role="button">Relieve Staff</a>
+            <a href="#" class="btn btn-info btn-lg btn-controls" role="button">Search</a>
+        </div>
+
+    </div>
+
+
+
+    <script language="javascript" src="js/bootstrap.min.js"></script>
+    <link rel="stylesheet" href="css/bootstrap.min.css"/>
+    <script  src="/javascripts/jquery.js"></script>
+    <script  src="/javascripts/common.js"></script>
+    <script  src="/javascripts/ad-index.js"></script>
+  </body>
+</html>

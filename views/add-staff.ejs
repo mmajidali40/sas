@@ -1,0 +1,51 @@
+<!DOCTYPE html>
+<html lang="en" >
+
+<head>
+  <meta charset="UTF-8">
+  <title>Add Staff</title>
+  <link rel="stylesheet" href="/stylesheets/style.css">
+  <link rel="stylesheet" href="/stylesheets/add-staff.css">
+</head>
+
+<body>
+
+    <% if(message != null){ %>
+        <div class="container">
+            <div id='div-alert' class="alert alert-danger alert-dismissible">
+                <a href="#" class="close" data-dismiss="alert" aria-label="close" id='btn-alert'>&times;</a>
+                <strong><%=message%></strong>
+            </div>
+        </div>
+    <% } %>
+  
+
+  <div class="login-page">
+  <div class="form">
+    <form class="login-form" action="/submit-staff" method="POST">
+      <input type="text" placeholder="name" name="name" />
+      <input type="text" placeholder="father/husband name" name="fname" />
+      <input type="text" placeholder="cnic" name="cnic" />
+      <input type="text" placeholder="phone" name="phone" />
+      <input type="text" placeholder="address" name="address" />
+      <input list="desig" name="desig" placeholder="designation">
+      <datalist id="desig">
+        <% for(var i=0; i<data.length; i++) {%>
+            <option value=<%= data[i].code %>>
+        <% } %>
+      </datalist>
+    
+      <button >Save</button>
+    </form>
+  </div>
+    
+</div>
+
+<script language="javascript" src="js/bootstrap.min.js"></script>
+<link rel="stylesheet" href="css/bootstrap.min.css"/>
+<script  src="/javascripts/jquery.js"></script>
+<script  src="/javascripts/common.js"></script>
+<script  src="/javascripts/add-staff.js"></script>
+</body>
+
+</html>
