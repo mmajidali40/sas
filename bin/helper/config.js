@@ -13,3 +13,4 @@ require('./../models/staff');
 require('./../models/role');
 require('./../models/section');
 require('./../models/designation');
+require('./../models/attendance');

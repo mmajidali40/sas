@@ -1,0 +1,72 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <title>Search Staff</title>
+    <link rel='stylesheet' href='/stylesheets/ad-search-staff.css' />
+  </head>
+  <body>
+    <div>
+        
+        <% if(message != null){ %>
+          <div class="container">
+              <div id='div-alert' class="alert alert-danger alert-dismissible">
+                <a href="#" class="close" data-dismiss="alert" aria-label="close" id='btn-alert'>&times;</a>
+                <strong><%=message%></strong>
+              </div>
+          </div>
+        <% } %>
+        
+      <div class="form-attendance">
+        <form action="/submit-search-attendance" method="POST">
+            <div>
+              <strong>Date:</strong><input type="date" name="date">
+            </div>
+            <div class="div-btn-submit">
+                <button class="btn btn-success ">Submit</button>
+            </div>
+            <% if(data.length > 0) { %>
+
+                <div class="form-table-div">
+                        <table class="table table-bordered">
+                          <thead>
+                            <tr>
+                              <th>Name</th>
+                              <th>Father's Name</th>
+                              <th>Time In</th>
+                              <th>Time Out</th>
+                              <th>Attendance</th>
+                              <th>Remarks</th>
+                            </tr>
+                          </thead>
+                          <tbody>
+                            <% for(var i=0; i<data.length; i++) {%>
+                              <tr>
+                                <td><%=data[i].name%></td>
+                                <td><%=data[i].fname%></td>
+                                <td><%=data[i].timeIn%></td>
+                                <td><%=data[i].timeOut%></td>
+                                <td><%=data[i].IsPresent%></td>
+                                <td><%=data[i].remarks%></td>
+                            </tr>
+                            <% } %>
+                          </tbody>
+                        </table>
+                    </div>
+
+            <% } %>    
+
+
+        </form>
+
+      </div>
+
+    </div>
+
+
+
+    <script language="javascript" src="js/bootstrap.min.js"></script>
+    <link rel="stylesheet" href="css/bootstrap.min.css"/>
+    <script  src="/javascripts/jquery.js"></script>
+    <script  src="/javascripts/ad-mark-attendance.js"></script>
+  </body>
+</html>

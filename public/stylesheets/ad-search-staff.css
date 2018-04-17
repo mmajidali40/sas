@@ -13,6 +13,9 @@ body {
 .form-attendance {
   margin: 0 4% 0 4%;
 }
+.div-btn-submit {
+    margin: 5px;
+}
 .form-table-div {
   margin: 5px;
 }

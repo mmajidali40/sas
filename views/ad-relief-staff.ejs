@@ -1,7 +1,7 @@
 <!DOCTYPE html>
 <html>
   <head>
-    <title>Mark Attendance</title>
+    <title>Relief Staff</title>
     <link rel='stylesheet' href='/stylesheets/ad-mark-attendance.css' />
   </head>
   <body>
@@ -17,20 +17,14 @@
         <% } %>
         
       <div class="form-attendance">
-        <form action="/submit-attendance" method="POST">
-          <div>
-              <strong>Date:</strong><input type="date" name="date">
-          </div>
+        <form action="/submit-relief-staff" method="POST">
           <div class="form-table-div">
             <table class="table table-bordered">
               <thead>
                 <tr>
                   <th>Name</th>
                   <th>Father's Name</th>
-                  <th>Time In</th>
-                  <th>Time Out</th>
-                  <th>Attendance</th>
-                  <th>Remarks</th>
+                  <th>Relief</th>
                 </tr>
               </thead>
               <tbody>
@@ -38,10 +32,7 @@
                   <tr>
                     <td><%=data[i].name%></td>
                     <td><%=data[i].fname%></td>
-                    <td><input type="time" value="00:00" name=<%=data[i]._id%>></td>
-                    <td><input type="time" value="00:00" name=<%=data[i]._id%>></td>
                     <td><input type="checkbox" name=<%=data[i]._id%>></td>
-                    <td><input type="text"  value="" name=<%=data[i]._id%>></td>
                   </tr>
                 <% } %>
               </tbody>
