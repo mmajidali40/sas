@@ -55,20 +55,23 @@ router.get('/relief-staff', checkSession, function(req, res, next) {
 });
 
 router.get('/search-attendance', checkSession, function(req, res, next) {
-  res.render('ad-search-staff',{message: null, data: []});
+  res.render('ad-search-staff',{message: null, data: [], date: null, user: req.user.toJSON()});
 });
 
 
 
 router.post('/submit-search-attendance', checkSession, async function(req, res, next) {
   try {
-    // if(req.body.name == "" || req.body.name == null) {
-    //   return res.render('search-attendance', {message: "name is required", data: []});
-    // }
+    if(req.body.date == "") {
+      return res.render('ad-search-staff', {message: "date is required", data: [], date: null, user: req.user.toJSON()});
+    }
       
     let Attendance = mongoose.model('Attendance');
-    let data = await Attendance.findOne({date: new Date(req.body.date)});
-    res.render('ad-search-staff',{message: null, data: data.record});
+    let data = await Attendance.findOne({section: req.user.section, date: new Date(req.body.date)});
+    if(data == null) {
+      return res.render('ad-search-staff', {message: "no record found", data: [], date: req.body.date, user: req.user.toJSON()});
+    }
+    res.render('ad-search-staff',{message: null, data: data.record, date: req.body.date, user: req.user.toJSON()});
   } catch (error) {
     res.render('error',error);
   }
@@ -94,7 +97,7 @@ router.post('/submit-staff', checkSession, function(req, res, next) {
   let cnic = req.body.cnic;
   cnic = cnic.replace(/-/g, "");
   if(Number.isNaN(cnic*1) || cnic.length != 13) {
-    return res.render('add-staff', {message: "cnic is not valid"});
+    return res.render('add-staff', {message: "cnic is not valid", data: designations});
   }
 
   let designationId = null;
@@ -122,16 +125,20 @@ router.post('/submit-staff', checkSession, function(req, res, next) {
 router.post('/submit-attendance', checkSession, function(req, res, next) {
   if(req.body.date == "")  
     return res.render('ad-mark-attendance', {message: 'Please select the date', data: staff});  
-  
+
   let records =[];
   let keys = Object.keys(req.body);
   for(let i=1; i<keys.length; i++) {
     let obj = {
       staffId: keys[i],
-      timeIn: req.body[keys[i]][0],
-      timeOut: req.body[keys[i]][1],
-      IsPresent: req.body[keys[i]].length == 3 ? "absent" : "present",
-      remarks: req.body[keys[i]].length == 3 ? req.body[keys[i]][2] : req.body[keys[i]][3]
+      rec_app_pass: req.body[keys[i]][0],
+      sort_scrutiny: req.body[keys[i]][1],
+      track_app_pass: req.body[keys[i]][2],
+      entry_edit: req.body[keys[i]][3],
+      timeIn: req.body[keys[i]][4],
+      timeOut: req.body[keys[i]][5],
+      IsPresent: req.body[keys[i]].length == 7 ? "absent" : "present",
+      remarks: req.body[keys[i]].length == 3 ? req.body[keys[i]][6] : req.body[keys[i]][7]
     }
     staff.forEach( e => {
       if(e._id.toString() == obj.staffId) {

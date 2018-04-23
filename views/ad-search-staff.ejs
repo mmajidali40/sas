@@ -15,14 +15,20 @@
               </div>
           </div>
         <% } %>
-        
+      <div style="margin-left: 30%">
+        <h1>Hajj Computer Cell (G-<%= user.section.group%>)</h1>
+        <h2>POD (<%= user.section.name %>)</h2>
+        <h3>Daily Attendance & Progress Report</h3>
+      </div>
       <div class="form-attendance">
         <form action="/submit-search-attendance" method="POST">
             <div>
-              <strong>Date:</strong><input type="date" name="date">
-            </div>
-            <div class="div-btn-submit">
-                <button class="btn btn-success ">Submit</button>
+              <% if(date == null) { %>
+                <strong>Date:</strong><input type="date" name="date">
+              <% } else { %>
+                <strong>Date:</strong><input type="date" name="date" value=<%=date%>>
+              <% } %>
+              <button class="btn btn-success btn-md div-btn-submit">Submit</button>
             </div>
             <% if(data.length > 0) { %>
 
@@ -32,6 +38,10 @@
                             <tr>
                               <th>Name</th>
                               <th>Father's Name</th>
+                              <th>Recv Pass/App</th>
+                              <th>Sort/Scrutiny</th>
+                              <th>Track Pass/App</th>
+                              <th>Entry/Editing</th>
                               <th>Time In</th>
                               <th>Time Out</th>
                               <th>Attendance</th>
@@ -43,6 +53,10 @@
                               <tr>
                                 <td><%=data[i].name%></td>
                                 <td><%=data[i].fname%></td>
+                                <td><%=data[i].rec_app_pass%></td>
+                                <td><%=data[i].sort_scrutiny%></td>
+                                <td><%=data[i].track_app_pass%></td>
+                                <td><%=data[i].entry_edit%></td>
                                 <td><%=data[i].timeIn%></td>
                                 <td><%=data[i].timeOut%></td>
                                 <td><%=data[i].IsPresent%></td>
@@ -52,7 +66,9 @@
                           </tbody>
                         </table>
                     </div>
-
+                <div style="text-align: right">
+                  <h3>Assistant Director(G-<%=user.section.group%>)</h3>
+                </div>
             <% } %>    
 
 
