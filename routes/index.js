@@ -81,23 +81,24 @@ router.post('/submit-staff', checkSession, function(req, res, next) {
   if(req.body.name == "" || req.body.name == null) {
     return res.render('add-staff', {message: "name is required", data: designations});
   }
-  if(req.body.fname == "" || req.body.fname == null) {
-    return res.render('add-staff', {message: "father/husband name is required", data: designations});
-  }
-  if(req.body.cnic == "" || req.body.cnic == null) {
-    return res.render('add-staff', {message: "cnic is required", data: designations});
+  // if(req.body.fname == "" || req.body.fname == null) {
+  //   return res.render('add-staff', {message: "father/husband name is required", data: designations});
+  // }
+  // if(req.body.cnic == "" || req.body.cnic == null) {
+  //   return res.render('add-staff', {message: "cnic is required", data: designations});
+  // }
+  if(req.body.phone == "" || req.body.phone == null) {
+    return res.render('add-staff', {message: "phone no. is required", data: designations});
   }
   if(req.body.desig == "" || req.body.desig == null) {
     return res.render('add-staff', {message: "designation is required", data: designations});
   }
-  if(req.body.phone == "" || req.body.phone == null) {
-    return res.render('add-staff', {message: "designation is required", data: designations});
-  }
-
-  let cnic = req.body.cnic;
-  cnic = cnic.replace(/-/g, "");
-  if(Number.isNaN(cnic*1) || cnic.length != 13) {
-    return res.render('add-staff', {message: "cnic is not valid", data: designations});
+  if(req.body.cnic != null && req.body.cnic != "") {
+    let cnic = req.body.cnic;
+    cnic = cnic.replace(/-/g, "");
+    if(Number.isNaN(cnic*1) || cnic.length != 13) {
+      return res.render('add-staff', {message: "cnic is not valid", data: designations});
+    }
   }
 
   let designationId = null;
@@ -109,10 +110,10 @@ router.post('/submit-staff', checkSession, function(req, res, next) {
   let Staff = mongoose.model('Staff');
   let member = new Staff({
     name: req.body.name,
-    fname: req.body.fname,
-    cnic: req.body.name,
-    phone: req.body.phone,
+    fname: req.body.fname != null ? req.body.fname : "",
+    cnic: req.body.cnic != null ? req.body.cnic : "",
     address: req.body.address != null ? req.body.address : "",
+    phone: req.body.phone,
     createdAt: new Date(),
     designation: designationId,
     section: req.user.section
